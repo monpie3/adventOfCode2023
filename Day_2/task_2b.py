@@ -1,29 +1,3 @@
-# def check_set(game_set):
-#     """Check one set of cubes"""
-#     cubes = game_set.split(",")
-#     valid_game = False
-
-#     for cube in cubes:
-#         cube_num, cube_color = cube.strip().split(" ")
-#         if cube_color == "red" and int(cube_num) > MAX_RED:
-#             break
-#         if cube_color == "green" and int(cube_num) > MAX_GREEN:
-#             break
-#         if cube_color == "blue" and int(cube_num) > MAX_BLUE:
-#             break
-#     else:  # if no break happened
-#         valid_game = True
-
-#     return valid_game
-
-
-# def check_game(game):
-#     """Check one game"""
-#     game = game.split(";")
-#     for game_set in game:
-#         if not check_set(game_set):
-#             return False
-#     return True
 from collections import defaultdict
 import math
 
