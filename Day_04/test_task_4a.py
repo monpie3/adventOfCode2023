@@ -5,12 +5,12 @@ from task_4a import (
 )
 
 
-class TestFindPartNumbers(object):
+class TestCalculateTotalPoints(object):
     def test_calculate_total_points(self):
         assert calculate_total_points("Day_04/example_4a.txt") == 13
 
 
-class TestEvaluateEngineSchematic(object):
+class TestCountWinningNumbersMatches(object):
     def test_on_valid_value(self):
         card = "41 48 83 86 17 | 83 86  6 31 17  9 48 53"
         assert count_winning_numbers_matches(card) == 4
