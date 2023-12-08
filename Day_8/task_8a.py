@@ -1,8 +1,10 @@
 def go_right(node, nodes):
     return nodes[node][1]
 
+
 def go_left(node, nodes):
     return nodes[node][0]
+
 
 def parse_nodes(nodes):
     output = {}
@@ -11,6 +13,7 @@ def parse_nodes(nodes):
         a, b = instructions[1:9].split(", ")
         output[destinaton] = (a, b)
     return output
+
 
 def count_steps(filename):
     with open(filename) as f:
@@ -33,6 +36,7 @@ def count_steps(filename):
         steps += 1
 
     return steps
+
 
 if "__main__" == __name__:
     print(count_steps("Day_8/puzzle_input.txt"))
