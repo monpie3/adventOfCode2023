@@ -1,6 +1,5 @@
 from collections import Counter
 from enum import Enum
-import functools
 
 
 class HandType(Enum):
@@ -11,17 +10,6 @@ class HandType(Enum):
     FULL_HOUSE = "4"
     FOUR_OF_A_KIND = "5"
     FIVE_OF_A_KIND = "6"
-
-
-STRENGTH = ["A", "K", "Q", "T", "9", "8", "7", "6", "5", "4", "3", "2", "1", "0", "J"]
-
-
-def sorted_by(a, b):
-    for el in zip(a[0], b[0]):
-        if STRENGTH.index(el[0]) > STRENGTH.index(el[1]):
-            return -1
-        if STRENGTH.index(el[0]) < STRENGTH.index(el[1]):
-            return 1
 
 
 def handle_jocker(hand):
@@ -74,8 +62,9 @@ def create_ranking(games):
         type = get_hand_type(hand)
         type_ranking.append((type.value + hand, int(bind)))
 
-    cmp = functools.cmp_to_key(sorted_by)
-    return sorted(type_ranking, key=cmp)
+    return sorted(
+        type_ranking, key=lambda x: x[0].translate(str.maketrans("TJQKA", f"A0BCD"))
+    )
 
 
 def get_total_winnings(file_content):
