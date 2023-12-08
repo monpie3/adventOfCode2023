@@ -12,7 +12,7 @@ class HandType(Enum):
     FIVE_OF_A_KIND = "6"
 
 
-def handle_jocker(hand):
+def handle_joker(hand):
     if hand == "JJJJJ":
         return "22222"
 
@@ -31,7 +31,7 @@ def get_hand_type(hand):
     has_Jocker = "J" in hand
 
     if has_Jocker:
-        hand = handle_jocker(hand)
+        hand = handle_joker(hand)
 
     counted_cards = Counter(hand)
     diffrent_cards = len(counted_cards)
