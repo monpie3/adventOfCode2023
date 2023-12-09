@@ -11,14 +11,14 @@ def go_down(current_line):
 
 def go_up(sequences):
     for ind in range(len(sequences) - 1, 0, -1):
-        last_el_last_line = sequences[ind][0]
-        last_el_line_above = sequences[ind - 1][0]
-        sequences[ind - 1].insert(0, last_el_line_above - last_el_last_line)
-    return sequences[0][0]
+        last_el_last_line = sequences[ind][-1]
+        last_el_line_above = sequences[ind - 1][-1]
+        sequences[ind - 1].append(last_el_last_line + last_el_line_above)
+    return sequences[0][-1]
 
 
 def extrapolate_backwards(line):
-    current_line = list(map(int, line.split()))
+    current_line = list(map(int, line.split()))[::-1]
     is_all_zero = False
     sequences = [current_line]
 
