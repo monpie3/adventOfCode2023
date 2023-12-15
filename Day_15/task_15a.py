@@ -15,10 +15,10 @@ def hash_algorithm(string):
 
 def sum_of_hash(filename):
     initialization_sequence = process_input(filename)
-    hash = []
+    hash = 0
     for sequence in initialization_sequence:
-        hash.append(hash_algorithm(sequence))
-    return sum(hash)
+        hash += hash_algorithm(sequence)
+    return hash
 
 
 if __name__ == "__main__":
