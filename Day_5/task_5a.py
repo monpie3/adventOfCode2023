@@ -9,7 +9,10 @@ def parse_map(map_str):
 def find_corespond(value_to_tranlate, maps_with_translation):
     for map_values in maps_with_translation:
         destination_range_start, source_range_start, range_length = map_values
-        if value_to_tranlate >= source_range_start and value_to_tranlate <= range_length + source_range_start:
+        if (
+            value_to_tranlate >= source_range_start
+            and value_to_tranlate <= range_length + source_range_start
+        ):
             diffrence = value_to_tranlate - source_range_start
             translation = destination_range_start + diffrence
             return translation
