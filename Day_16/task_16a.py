@@ -1,5 +1,5 @@
 from enum import Enum
-from typing import List, Tuple, Set
+from typing import List, Tuple
 
 
 class Fields(Enum):
@@ -44,55 +44,57 @@ def move(
     direction: str,
     contraption: List,
     energized_tiles,
-) -> Tuple[int, int]:
-    if current_position == (-1, -1):
-        return energized_tiles
+) -> List[Tuple[int, int]]:
 
     width = len(contraption[0])
     height = len(contraption)
 
-    row, col = current_position
-    current_el = contraption[row][col]
+    stack = [(current_position, direction)]
 
-    if (
-        current_el == Fields.MIRROR_SLASH.value
-        or current_el == Fields.MIRROR_BACKSLASH.value
-    ):
-        direction = change_direction_by_mirror(current_el, direction)
+    while stack:
+        current_position, direction = stack.pop()
 
-    if current_el == Fields.SPLITTER_HORIZONTAL.value and direction in ["^", "V"]:
-        energized_tiles = move(current_position, ">", contraption, energized_tiles)
-        energized_tiles = move(current_position, "<", contraption, energized_tiles)
-        return energized_tiles
+        row, col = current_position
+        current_el = contraption[row][col]
 
-    elif current_el == Fields.SPLITTER_VERTICAL.value and direction in [">", "<"]:
-        energized_tiles = move(current_position, "^", contraption, energized_tiles)
-        energized_tiles = move(current_position, "V", contraption, energized_tiles)
-        return energized_tiles
+        if (
+            current_el == Fields.MIRROR_SLASH.value
+            or current_el == Fields.MIRROR_BACKSLASH.value
+        ):
+            direction = change_direction_by_mirror(current_el, direction)
 
-    else:
-        if current_el == Fields.EMPTY_SPACE.value or current_el in ["^", "V", "<", ">"]:
-            if contraption[row][col] == direction:
-                # loop
-                return energized_tiles
-            else:
+        if current_el == Fields.SPLITTER_HORIZONTAL.value and direction in ["^", "V"]:
+            stack.append((current_position, ">"))
+            stack.append((current_position, "<"))
+
+        elif current_el == Fields.SPLITTER_VERTICAL.value and direction in [">", "<"]:
+            stack.append((current_position, "^"))
+            stack.append((current_position, "V"))
+
+        else:
+            if current_el == Fields.EMPTY_SPACE.value or current_el in [
+                "^",
+                "V",
+                "<",
+                ">",
+            ]:
+                if contraption[row][col] == direction:
+                    continue  # loop, we are going in the same direction
                 contraption[row][col] = direction
 
-        if direction == "^":
-            row -= 1
-        elif direction == "V":
-            row += 1
-        elif direction == "<":
-            col -= 1
-        elif direction == ">":
-            col += 1
+            if direction == "^":
+                row -= 1
+            elif direction == "V":
+                row += 1
+            elif direction == "<":
+                col -= 1
+            elif direction == ">":
+                col += 1
 
-        if 0 <= row < height and 0 <= col < width:
-            # otherwise - out of range
-            next_position = (row, col)
-            energized_tiles.append(next_position)
-            move(next_position, direction, contraption, energized_tiles)
-
+            if 0 <= row < height and 0 <= col < width:
+                next_position = (row, col)
+                energized_tiles.append(next_position)
+                stack.append((next_position, direction))
     return energized_tiles
 
 
