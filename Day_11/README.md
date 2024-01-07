@@ -110,3 +110,18 @@ To begin, [get your puzzle input](https://adventofcode.com/2023/day/11/input).
 Your puzzle answer was `9403026`.
 
 The first half of this puzzle is complete! It provides one gold star: ⭐
+
+
+## \--- Part Two ---
+
+The galaxies are much _older_ (and thus much _farther apart_) than the researcher initially estimated.
+
+Now, instead of the expansion you did before, make each empty row or column _one million times_ larger. That is, each empty row should be replaced with `1000000` empty rows, and each empty column should be replaced with `1000000` empty columns.
+
+(In the example above, if each empty row or column were merely `10` times larger, the sum of the shortest paths between every pair of galaxies would be `_1030_`. If each empty row or column were merely `100` times larger, the sum of the shortest paths between every pair of galaxies would be `_8410_`. However, your universe will need to expand far beyond these values.)
+
+Starting with the same initial image, expand the universe according to these new rules, then find the length of the shortest path between every pair of galaxies. _What is the sum of these lengths?_
+
+Your puzzle answer was `543018317006`.
+
+Both parts of this puzzle are complete! They provide two gold stars: ⭐⭐
